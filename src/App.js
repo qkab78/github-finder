@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { AppBar, Toolbar, Typography, makeStyles, Container} from '@material-ui/core';
+import Search from './components/search/Search';
+import Users from './components/users/Users';
 
-function App() {
+const useStyles = makeStyles(theme => ({
+  root:{
+      flexGrow:1
+  }
+}));
+
+const store = createStore();
+const App = () => {
+  const [users, setUsers] = useState([]);
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <AppBar position="static" >
+        <Toolbar>
+          <Typography variant="h6" color="inherit">
+            <i className="fab fa-github"/> GitFinder
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Container styles={classes.root} maxWidth="sm" >
+        <Search />
+      </Container>
+      <Users users={users}/>
+    </Provider>
   );
 }
 
