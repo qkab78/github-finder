@@ -1,10 +1,14 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types'
-import store from './redux/store'
 import { AppBar, Toolbar, Typography, makeStyles, Container } from '@material-ui/core';
+import { connect } from 'react-redux'
+
+import { searchUsers, clearProfiles } from './redux/actions/git-action'
+
 import Search from './components/search/Search';
 import Users from './components/users/Users';
+
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -12,11 +16,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const App = ({ git }) => {
+const App = ({ git, searchUsers, clearProfiles }) => {
   const classes = useStyles();
+
   return (
-    <Provider store={store}>
-      <AppBar position="static" >
+    <Fragment>
+      <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit">
             <i className="fab fa-github" /> GitFinder
@@ -24,11 +29,19 @@ const App = ({ git }) => {
         </Toolbar>
       </AppBar>
       <Container styles={classes.root} maxWidth="sm" >
-        <Search />
+        <Search searchUsers={searchUsers} clearProfiles={clearProfiles} showClear={git.profiles && git.profiles.length > 0 ? true : false} />
       </Container>
-      <Users />
-    </Provider>
+      <Users profiles={git.profiles} loading={git.loading} />
+    </Fragment>
   );
 }
 
-export default App;
+App.propTypes = {
+  git: PropTypes.object.isRequired,
+  searchUsers: PropTypes.func.isRequired,
+  clearProfiles: PropTypes.func.isRequired
+}
+const mapStateToProps = state => ({
+  git: state.git
+})
+export default connect(mapStateToProps, { searchUsers, clearProfiles })(App);

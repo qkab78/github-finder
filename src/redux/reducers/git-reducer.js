@@ -1,4 +1,4 @@
-import { GET_GIT_PROFILES, SET_LOADING, GET_ERRORS } from '../actions/types';
+import { GET_GIT_PROFILES, SEARCH_PROFILES, SET_LOADING, GET_ERRORS, CLEAR_PROFILES } from '../actions/types';
 
 
 const initialState = {
@@ -15,10 +15,21 @@ export default (state = initialState, { type, payload }) => {
                 loading: false,
                 profiles: payload
             }
+        case CLEAR_PROFILES:
+            return {
+                ...state,
+                loading: false,
+                profiles: []
+            }
+        case SEARCH_PROFILES:
+            return {
+                ...state,
+                loading: false,
+                profiles: payload
+            }
         case SET_LOADING:
             return { ...state, loading: true }
         case GET_ERRORS:
-            console.error(payload);
             return {
                 ...state,
                 errors: payload

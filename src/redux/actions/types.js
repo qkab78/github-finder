@@ -1,3 +1,5 @@
 export const GET_GIT_PROFILES = 'GET_GIT_PROFILES';
+export const CLEAR_PROFILES = 'CLEAR_PROFILES';
+export const SEARCH_PROFILES = 'SEARCH_PROFILES';
 export const SET_LOADING = 'SET_LOADING';
 export const GET_ERRORS = 'GET_ERRORS';

@@ -1,9 +1,8 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Grid, makeStyles, Container } from '@material-ui/core';
 import UserItem from './UserItem';
-import { getGitProfiles } from '../../redux/actions/git-action';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -18,33 +17,22 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Users = ({ git: { profiles, loading }, getGitProfiles }) => {
-    // const [users, setUsers] = useState([]);
-    // const getProfiles = () => getGitProfiles();
-    useEffect(() => {
-        getGitProfiles();
-    }, []);
+const Users = ({ profiles, loading }) => {
     const classes = useStyles();
-    if (loading || profiles === null) {
+    if (loading) {
         return <h4>Loading...</h4>
     }
     return (
         <Container>
-            <h3>Github Profiles</h3>
             <Grid container direction="row" justify="center" alignItems="center" spacing={3} className={classes.root}>
-                {!loading && profiles.length === 0 ? (
-                    <p>No profiles...</p>
-                ) : profiles.map(user => <UserItem user={user} key={user.id} />)}
+                {!loading && profiles ? profiles.map(user => <UserItem user={user} key={user.id} />) : null}
             </Grid>
         </Container>
     )
 }
 
 Users.propTypes = {
-    git: PropTypes.object.isRequired,
+    profiles: PropTypes.array,
 }
-const mapStateToProps = state => ({
-    git: state.git
-});
-export default connect(mapStateToProps, { getGitProfiles })(Users)
+export default Users
 
