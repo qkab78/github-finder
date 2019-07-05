@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link as RouterLink } from 'react-router-dom'
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, makeStyles, Typography, Button, Grid } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -33,14 +34,12 @@ const UserItem = ({ user }) => {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="primary">
-                        Share
-                </Button>
-                    <Button size="small" color="primary">
-                        Learn More
-                </Button>
+                    <RouterLink to={`/user/${login}`}>
+                        <Button size="small" color="primary">
+                            Learn More
+                        </Button>
+                    </RouterLink>
                 </CardActions>
-                {/* <h3>{login}</h3> */}
             </Card>
         </Grid>
     )

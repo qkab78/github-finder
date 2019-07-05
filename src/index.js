@@ -5,13 +5,16 @@ import { Provider } from 'react-redux';
 
 import store from './redux/store'
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import App from './App';
+import User from './components/user/User';
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Route exact path="/" component={App} />
+            <Route exact path="/user/:username" component={User} />
         </Router>
     </Provider>, document.getElementById('root'));
 

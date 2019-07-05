@@ -9,6 +9,8 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'wrap',
     },
     button: {
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1)
     },
     input: {
         marginLeft: theme.spacing(1),
@@ -28,16 +30,19 @@ const Search = ({ searchUsers, clearProfiles, showClear }) => {
             <form className={classes.root} onSubmit={onSubmit}>
                 <Grid container>
                     <Grid item xs={12}>
-                        <TextField placeholder="Enter a profile name" label="Github name" style={{ marginTop: 8 }} fullWidth margin="normal" variant="outlined" onChange={e => setText(e.target.value)} InputLabelProps={{ shrink: true }} />
+                        <TextField placeholder="Enter a profile name" label="Github name" style={{ marginTop: 8 }} fullWidth margin="normal" value={text} variant="outlined" onChange={e => setText(e.target.value)} InputLabelProps={{ shrink: true }} />
                     </Grid>
                     <Grid item xs={12}>
-                        <ButtonBase type="submit" className={classes.button} variant="contained" color="primary" component="button" >
-                            Search
-                    </ButtonBase>
+                        <Button variant="contained" color="primary" component="button" fullWidth style={{ marginBottom: 8 }}>
+                            <ButtonBase type="submit" className={classes.button} variant="contained" color="primary" component="button" >
+                                Search
+                            </ButtonBase>
+                        </Button>
+
                     </Grid>
                 </Grid>
             </form>
-            {showClear && (<Button onClick={clearProfiles} className={classes.button} variant="contained" color="primary" component="button" fullWidth>
+            {showClear && (<Button onClick={clearProfiles} className={classes.button} variant="contained" color="secondary" component="button" fullWidth>
                 Clear
             </Button>)}
         </Fragment>
