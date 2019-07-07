@@ -17,13 +17,17 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(1),
     }
 }))
-const Search = ({ searchUsers, clearProfiles, showClear }) => {
+const Search = ({ searchUsers, clearProfiles, showClear, setAlert }) => {
     const [text, setText] = useState('')
     const classes = useStyles();
     const onSubmit = e => {
         e.preventDefault();
-        searchUsers(text)
-        setText('');
+        if (text === '') {
+            setAlert('Please enter something', 'light')
+        } else {
+            searchUsers(text)
+            setText('');
+        }
     }
     return (
         <Fragment>
@@ -53,6 +57,7 @@ Search.propTypes = {
     searchUsers: PropTypes.func.isRequired,
     clearProfiles: PropTypes.func.isRequired,
     showClear: PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired,
 }
 
 export default Search

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types'
 import { AppBar, Toolbar, Typography, makeStyles, Container } from '@material-ui/core';
 import { connect } from 'react-redux'
@@ -7,6 +7,7 @@ import { searchUsers, clearProfiles } from './redux/actions/git-action'
 
 import Search from './components/search/Search';
 import Users from './components/users/Users';
+import Alert from './components/layout/Alert';
 
 
 
@@ -18,7 +19,13 @@ const useStyles = makeStyles(theme => ({
 
 const App = ({ git, searchUsers, clearProfiles }) => {
   const classes = useStyles();
+  const [alert, setAlert] = useState(null)
 
+  const setAnAlert = (msg, type) => {
+    setAlert({ msg, type })
+    setTimeout(() => setAlert(null), 5000);
+  }
+  console.log(alert)
   return (
     <Fragment>
       <AppBar position="static">
@@ -29,7 +36,8 @@ const App = ({ git, searchUsers, clearProfiles }) => {
         </Toolbar>
       </AppBar>
       <Container styles={classes.root} maxWidth="sm" >
-        <Search searchUsers={searchUsers} clearProfiles={clearProfiles} showClear={git.profiles && git.profiles.length > 0 ? true : false} />
+        <Alert alert={alert} />
+        <Search setAlert={setAnAlert} searchUsers={searchUsers} clearProfiles={clearProfiles} showClear={git.profiles && git.profiles.length > 0 ? true : false} />
       </Container>
       <Users profiles={git.profiles} loading={git.loading} />
     </Fragment>
