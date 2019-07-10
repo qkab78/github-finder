@@ -50,7 +50,6 @@ const useStyles = makeStyles(theme => ({
 
 const User = ({ git: { profile, repos }, match, loading, getGitProfile, getGitRepos }) => {
     const classes = useStyles();
-    console.log(match.params.username)
     useEffect(() => {
         getGitProfile(match.params.username)
         getGitRepos(match.params.username)

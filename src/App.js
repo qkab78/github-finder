@@ -26,7 +26,6 @@ const App = ({ git, searchUsers, clearProfiles }) => {
     setAlert({ msg, type })
     setTimeout(() => setAlert(null), 5000);
   }
-  console.log(alert)
   return (
     <Fragment>
       <Container styles={classes.root} >
