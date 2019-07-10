@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from 'react-redux';
 
 import store from './redux/store'
@@ -9,12 +9,20 @@ import * as serviceWorker from './serviceWorker';
 
 import App from './App';
 import User from './components/user/User';
+import About from './components/pages/About';
+import NavBar from './components/layout/NavBar';
+import NotFound from './components/pages/NotFound';
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <Route exact path="/" component={App} />
-            <Route exact path="/user/:username" component={User} />
+            <NavBar />
+            <Switch>
+                <Route exact path="/" component={App} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/user/:username" component={User} />
+                <Route component={NotFound} />
+            </Switch>
         </Router>
     </Provider>, document.getElementById('root'));
 

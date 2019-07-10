@@ -1,12 +1,16 @@
 import React, { useState, Fragment } from 'react'
 import PropTypes from 'prop-types'
-
+import clsx from 'clsx'
 import { Grid, TextField, ButtonBase, Button, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
+    },
+    container: {
+        marginTop: '20px',
+        marginBottom: '20px',
     },
     button: {
         marginTop: theme.spacing(1),
@@ -31,7 +35,7 @@ const Search = ({ searchUsers, clearProfiles, showClear, setAlert }) => {
     }
     return (
         <Fragment>
-            <form className={classes.root} onSubmit={onSubmit}>
+            <form className={clsx(classes.root, classes.container)} onSubmit={onSubmit}>
                 <Grid container>
                     <Grid item xs={12}>
                         <TextField placeholder="Enter a profile name" label="Github name" style={{ marginTop: 8 }} fullWidth margin="normal" value={text} variant="outlined" onChange={e => setText(e.target.value)} InputLabelProps={{ shrink: true }} />
@@ -45,10 +49,10 @@ const Search = ({ searchUsers, clearProfiles, showClear, setAlert }) => {
 
                     </Grid>
                 </Grid>
-            </form>
-            {showClear && (<Button onClick={clearProfiles} className={classes.button} variant="contained" color="secondary" component="button" fullWidth>
-                Clear
+                {showClear && (<Button onClick={clearProfiles} className={classes.button} variant="contained" color="secondary" component="button" fullWidth>
+                    Clear
             </Button>)}
+            </form>
         </Fragment>
     )
 }

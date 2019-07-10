@@ -5,6 +5,8 @@ import { Info } from '@material-ui/icons'
 const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(2, 1),
+        marginTop: '20px',
+        marginBottom: '20px',
     },
 }));
 const Alert = ({ alert }) => {

@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types'
-import { AppBar, Toolbar, Typography, makeStyles, Container } from '@material-ui/core';
+import { makeStyles, Container } from '@material-ui/core';
 import { connect } from 'react-redux'
+import clsx from 'clsx'
 
 import { searchUsers, clearProfiles } from './redux/actions/git-action'
 
@@ -28,14 +29,7 @@ const App = ({ git, searchUsers, clearProfiles }) => {
   console.log(alert)
   return (
     <Fragment>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" color="inherit">
-            <i className="fab fa-github" /> GitFinder
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Container styles={classes.root} maxWidth="sm" >
+      <Container styles={classes.root} >
         <Alert alert={alert} />
         <Search setAlert={setAnAlert} searchUsers={searchUsers} clearProfiles={clearProfiles} showClear={git.profiles && git.profiles.length > 0 ? true : false} />
       </Container>
